@@ -1,0 +1,14 @@
+#!/bin/bash
+
+filePath=/sys/devices/pci0000:00/0000:00:14.3/PNP0C09:00/VPC2004:00/conservation_mode
+mode=$(<$filePath)
+
+if [[ "$mode" -eq 0 ]]; then
+  echo 1 | sudo tee $filePath 1>/dev/null
+
+  echo "CONSERVATION MODE IS ON"
+else
+  echo 0 | sudo tee $filePath 1>/dev/null
+
+  echo "CONSERVATION MODE IS OFF"
+fi
